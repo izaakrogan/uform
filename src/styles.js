@@ -2,7 +2,6 @@
 
 export default {
   container: {
-    backgroundColor: '#ccc',
     display:'flex',
     flexDirection:'column',
     textAlign:'centre',
@@ -25,5 +24,5 @@ export default {
   },
   label: {
     margin:'auto'
-  }
+  },
 };

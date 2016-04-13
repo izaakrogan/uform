@@ -10,7 +10,7 @@ export const initialState = {
   email: {value:undefined, validated:undefined},
   bio: {value:undefined, validated:undefined},
   password: {value:undefined, validated:undefined},
-  jobTitle: {value:undefined},
+  jobtitle: {value:undefined},
   employer: {value:undefined}
 };
 

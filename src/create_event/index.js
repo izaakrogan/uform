@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import EventItem from './components/event_item.js';
+import Navbar from '../features/navbar.js';
 
 import * as EventActions from './actions.js';
 import styles from '../styles.js';
 
 const mapDispatchToProps = {
-  ...EventActions
+  ...EventActions,
 };
 
 class Event extends Component {
@@ -21,9 +22,9 @@ class Event extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <h2 style={{margin:'20px auto'}}>Create Event</h2>
-        <div style={Object.assign({}, styles.container, {flexDirection:'row', justifyContent:'space-around', flexWrap:'wrap'})}>
-          <form style={styles.container}>
+        <Navbar name={'Create Event'} link={'view_event'} linkName={'View Events'} {...this.props}/>
+        <div style={Object.assign({}, styles.container, innerContainer)}>
+          <div style={styles.container}>
 
             <label for='name' type='text'>
               <span style={{display:'none'}}>Name of event</span>
@@ -149,7 +150,7 @@ class Event extends Component {
             </label>
 
             <button onClick={() => this.props.saveEvent()} style={styles.button}>Create event</button>
-          </form>
+          </div>
           <EventItem
             name={this.props.create_event.name}
             type={this.props.create_event.type}
@@ -165,6 +166,8 @@ class Event extends Component {
    );
   }
 }
+
+const innerContainer = {flexDirection:'row', justifyContent:'space-around', flexWrap:'wrap', paddingTop:'50', paddingBottom:'50'}
 
 const mapStateToProps = state => ({...state});
 

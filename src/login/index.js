@@ -18,8 +18,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
-        <h2 style={styles.header}>Login</h2>
+      <div style={Object.assign({}, styles.container, {paddingTop:'100'})}>
+        <h2 style={Object.assign({}, styles.header, {paddingBottom:'20'})}>Login</h2>
         <label style={styles.label} for='email' type='text'>
           <span style={{display:'none'}}>Email address</span>
           <input

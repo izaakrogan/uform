@@ -17,7 +17,14 @@ const EventItem = (props) => {
 
 var container = {
   border:'1px solid black',
-  width:'450px'
+  width:'350px',
+  display:'flex',
+  flexDirection:'column',
+  justifyContent:'space-around',
+  paddingLeft:'20',
+  height:'400',
+  margin:'10'
+
 }
 
 export default EventItem

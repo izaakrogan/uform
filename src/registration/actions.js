@@ -18,7 +18,7 @@ export const register = () => (dispatch, getState) => {
 
   const {registration} = getState();
 
-  const {name, email, password, bio, jobTitle, employer} = registration
+  const {name, email, password, jobtitle, employer} = registration;
 
   const allInputsValidated = [
     'name',
@@ -26,8 +26,16 @@ export const register = () => (dispatch, getState) => {
     'password'
   ].every(field => registration[field].validated);
 
+  const user = {
+    'name':name.value,
+    'email':email.value,
+    'password':password.value,
+    'jobtitle':jobtitle.value,
+    'employer':employer.value
+  };
+
   if(!allInputsValidated) {
-    window.alert('Please correctly fill in name, email and password fields')
+    window.alert('Please correctly fill in name, email and password fields');
   } else {
     const req = {
       url:'http://localhost:3003/register',
@@ -35,7 +43,8 @@ export const register = () => (dispatch, getState) => {
       headers:{
         'Content-type':'application/json'
       },
-    }
+      body: JSON.stringify(user)
+    };
 
     fetch(req.url, req)
     .then(function(response) {
@@ -43,7 +52,7 @@ export const register = () => (dispatch, getState) => {
     }).then(json => {
       if (json.status === 'success') {
         window.alert('hit registration endpoint and returned success');
-        dispatch(updateStore('user', {name, email, password, bio, jobTitle, employer}));
+        dispatch(updateStore('user', json.user));
         dispatch(updateStore('logged_in', true));
       } else {
         throw new Error('Login');

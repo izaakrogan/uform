@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Router from './routing/';
+import Router from './routing/index.js';
 import { Provider } from 'react-redux';
 import configureStore from './configure_store.js';
 

@@ -5,7 +5,7 @@ import {
   GO_BACK,
 } from '../action_types.js';
 
-const initialRoute = {name:'create_event'};
+const initialRoute = {name:'login'};
 
 export const initialState = {
   route: initialRoute,

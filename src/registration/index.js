@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styles from '../styles.js';
 import * as RegistrationActions from './actions.js';
+import Navbar from '../features/navbar.js';
 
 const mapDispatchToProps = {
   ...RegistrationActions
@@ -23,7 +24,7 @@ class Registration extends Component {
     var nameValid = this.props.registration.name.validated === false && {borderColor: 'red'};
     return (
       <div style={container}>
-        <h2 style={styles.header}>Register</h2>
+        <h2 style={Object.assign({}, styles.header, {paddingBottom:'20'})}>Register</h2>
         <label style={styles.label} for='name' type='text'>
           <span style={{display:'none'}}>Name</span>
           <input
@@ -80,17 +81,17 @@ class Registration extends Component {
             }}
           />
         </label>
-        <label style={styles.label} for='jobTitle' type='text'>
+        <label style={styles.label} for='jobtitle' type='text'>
           <span style={{display:'none'}}>job title</span>
           <input
-            id='jobTitle'
+            id='jobtitle'
             style={styles.input}
             type="text"
             placeholder='Job title'
             required
-            value={this.props.registration.jobTitle.value}
+            value={this.props.registration.jobtitle.value}
             onChange={(e) => {
-              return this.props.changeInput('jobTitle', e.target.value)
+              return this.props.changeInput('jobtitle', e.target.value)
             }}
           />
         </label>
@@ -108,6 +109,15 @@ class Registration extends Component {
             }}
           />
         </label>
+        <div style={{display:'flex',flexDirection:'row', width:400, margin:'auto'}}>
+        <button
+          onClick={() => {
+            return this.props.changeRoute({name:'login'})
+          }}
+          style={button}
+        >
+          <p>back</p>
+        </button>
         <button
           onClick={() => {
             return this.props.register()
@@ -116,15 +126,16 @@ class Registration extends Component {
         >
           <p>register</p>
         </button>
+        </div>
       </div>
    );
   }
 }
 
 var container = {
-  backgroundColor: '#ccc',
   display:'flex',
-  flexDirection:'column'
+  flexDirection:'column',
+  paddingTop:'100'
 };
 
 var button = {

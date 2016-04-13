@@ -12,8 +12,8 @@ const updateStore = (field, value) => {
   return ({type:types.UPDATE_STORE,field,value})
 };
 
-const addEvent = (event) => {
-  return ({type:types.ADD_EVENT, event})
+const updateEvents = (event) => {
+  return ({type:types.UPDATE_EVENTS, event})
 }
 
 export const saveEvent = () => (dispatch, getState) => {
@@ -29,42 +29,38 @@ export const saveEvent = () => (dispatch, getState) => {
     additional_info
   } = getState().create_event;
 
-  const {events} = getState().store
-
   const event = {
-    name,
-    type,
-    host,
-    start_time,
-    end_time,
-    guest_list,
-    location,
-    additional_info
-  }
+    'name':name,
+    'type':type,
+    'host':host,
+    'start_time':start_time,
+    'end_time':end_time,
+    'guest_list':guest_list,
+    'location':location,
+    'additional_info':additional_info,
+  };
 
-  if(Object.keys(event).every(ev => {
-    console.log(ev)
-    return event[ev] !== undefined || ev === additional_info
-  })) {
+
+  if(true) {
     const req = {
       url:'http://localhost:3003/createEvent',
       method:'POST',
+      headers:{
+        'Content-type':'application/json'
+      },
       body:JSON.stringify(event)
     };
 
     fetch(req.url, req).then((res) => {
-      return res.json()
+      return res.json();
     }).then(json => {
-      console.log(json)
       if(json.status === 'success') {
-        let newEvents = events.concat(event)
-        console.log('newEvents', newEvents)
-        dispatch(addEvent(newEvents));
-        dispatch(NavigationActions.navigateTo({name:'view_event'}))
+        dispatch(updateEvents(json.events));
+        dispatch(NavigationActions.navigateTo({name:'view_event'}));
       }
-    })
+    });
   } else {
-    window.alert('Please check you registration fields')
+    window.alert('Please check you registration fields');
   }
 };
 

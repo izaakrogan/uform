@@ -2,11 +2,14 @@
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-
 import * as NavigationActions from './actions.js';
+import * as LoginActions from '../login/actions.js';
 import _routes from './routes.js';
 
-import Footer from '../features/footer.js';
+const mapDispatchToProps = {
+  ...NavigationActions,
+  ...LoginActions
+};
 
 class Router extends Component {
 
@@ -18,12 +21,11 @@ class Router extends Component {
     return (
       <div>
         <Component {...fullProps} />
-        <Footer {...fullProps}/>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => ({ ...state.router, state });
 
-export default connect(mapStateToProps, NavigationActions)(Router);
+export default connect(mapStateToProps, mapDispatchToProps)(Router);
