@@ -13,18 +13,17 @@ const EventItem = (props) => {
       <h3>additional info: {props.additional_info}</h3>
     </div>
  );
-}
+};
 
-var container = {
+const container = {
   border:'1px solid black',
   width:'350px',
   display:'flex',
   flexDirection:'column',
   justifyContent:'space-around',
-  paddingLeft:'20',
+  paddingLeft:20,
   height:'400',
   margin:'10'
+};
 
-}
-
-export default EventItem
+export default EventItem;

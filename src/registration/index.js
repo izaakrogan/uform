@@ -24,7 +24,7 @@ class Registration extends Component {
     var nameValid = this.props.registration.name.validated === false && {borderColor: 'red'};
     return (
       <div style={container}>
-        <h2 style={Object.assign({}, styles.header, {paddingBottom:'20'})}>Register</h2>
+        <h2 style={Object.assign({}, styles.header, {paddingBottom:20})}>Register</h2>
         <label style={styles.label} for='name' type='text'>
           <span style={{display:'none'}}>Name</span>
           <input
@@ -132,13 +132,13 @@ class Registration extends Component {
   }
 }
 
-var container = {
+const container = {
   display:'flex',
   flexDirection:'column',
-  paddingTop:'100'
+  paddingTop:100
 };
 
-var button = {
+const button = {
   width:150,
   height: 40,
   margin:'10px auto'
