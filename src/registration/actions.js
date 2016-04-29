@@ -38,7 +38,7 @@ export const register = () => (dispatch, getState) => {
     window.alert('Please correctly fill in name, email and password fields');
   } else {
     const req = {
-      url:'http://localhost:3003/register',
+      url:'https://uform-api.herokuapp.com/register',
       method:'POST',
       headers:{
         'Content-type':'application/json'

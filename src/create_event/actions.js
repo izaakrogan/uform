@@ -43,7 +43,7 @@ export const saveEvent = () => (dispatch, getState) => {
 
   if(true) {
     const req = {
-      url:'http://localhost:3003/createEvent',
+      url:'https://uform-api.herokuapp.com/createEvent',
       method:'POST',
       headers:{
         'Content-type':'application/json'
@@ -71,7 +71,7 @@ export const getAddress = () => (dispatch, getState) => {
   } = getState().create_event;
 
   const req = {
-      url:`http://localhost:3003?postcode=${location}`,
+      url:`https://uform-api.herokuapp.com/getAddress?postcode=${location}`,
       method:'GET',
       headers:{
         'Content-type':'application/json',

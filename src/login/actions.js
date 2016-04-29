@@ -23,7 +23,7 @@ export const login = () => (dispatch, getState) => {
     window.alert('Please check your inputs and try again');
   } else {
     const req = {
-      url:`http://localhost:3003/login`,
+      url:`https://uform-api.herokuapp.com/login`,
       method:'POST',
       headers:{
         'Content-type':'application/json'
