@@ -1,9 +1,16 @@
 'use strict';
 
-import * as types from '../action_types.js';
+module.exports = ({
+  actionTypes
+}) => {
 
-export const updateStore = (field, value) => {
-  return ({type:types.UPDATE_STORE,field,value})
-};
+  const internals = {};
 
-export const clearStore = () => ({type:types.CLEAR_STORE});
+  internals.update = (field, value) => {
+    return ({type:actionTypes.UPDATE_STORE,field,value})
+  };
+
+  internals.clearStore = () => ({type:actionTypes.CLEAR_STORE});
+
+  return internals;
+}

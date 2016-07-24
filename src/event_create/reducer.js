@@ -3,21 +3,28 @@
 module.exports = ({actionTypes}) => {
 
   const {
-    UPDATE_LOGIN_FIELD
+    CHANGE_EVENT_FIELD,
   } = actionTypes;
 
   const initialState = {
-    email:undefined,
-    password:undefined
+    name:undefined,
+    type:undefined,
+    host:undefined,
+    start_time:undefined,
+    end_time:undefined,
+    guest_list:undefined,
+    location:undefined,
+    additional_info:undefined
   };
 
   const reducer = (state,action) => {
     state = state || initialState;
+    const {field,value} = action;
     switch (action.type) {
-      case UPDATE_LOGIN_FIELD:
+      case CHANGE_EVENT_FIELD:
         return {
           ...state,
-          [action.field]:action.value
+          [field]: value
         };
       default:
         return {

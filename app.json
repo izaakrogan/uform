@@ -2,7 +2,6 @@
   "name": "uform",
   "description": "A form example using Node.js, hapi, react",
   "repository": "https://github.com/izaakrogan/uform",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "hapi", "react"],
   "image": "heroku/nodejs"
 }

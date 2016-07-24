@@ -1,12 +1,15 @@
+'use strict';
+
 const Server = require('./server.js');
-const port = (process.env.PORT || 3000);
+const port = (process.env.PORT || 8080);
 const app = Server.app();
 
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
+  const React = require('react');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('./webpack.config.js');
+  const config = require('./webpack.config.dev.js');
   const compiler = webpack(config);
 
   app.use(webpackHotMiddleware(compiler));

@@ -1,28 +1,36 @@
-import { AppContainer } from 'react-hot-loader';
+'use strict';
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { combineReducers } from 'redux';
+import R from 'ramda';
+import Router from './router/container.js';
+import './styles/app.scss';
 
-const rootEl = document.getElementById('root');
-//inital app
-ReactDOM.render(
-  <AppContainer>
-    <App />
-  </AppContainer>,
-  rootEl
+const internalModules = {
+  router:require('./router/index.js')(),
+  login:require('./login/index.js')(),
+  register:require('./register/index')(),
+  event_view:require('./event_view/index.js')(),
+  event_create:require('./event_create/index')(),
+  store:require('./store/index')()
+};
+
+const actions = R.map((module) => module.actions, internalModules);
+
+const reducers = combineReducers({
+  ...R.map((module) => module.reducer, internalModules)
+});
+
+const store = require('./configure_store.js')({
+  actions:actions,
+  reducers:reducers,
+});
+
+render(
+  <Provider store={store}>
+    <Router />
+  </Provider>,
+  document.getElementById('main')
 );
-
-
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    // If you use Webpack 2 in ES modules mode, you can
-    // use <App /> here rather than require() a <NextApp />.
-    const NextApp = require('./App').default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextApp />
-      </AppContainer>,
-      rootEl
-    );
-  });
-}

@@ -1,0 +1,15 @@
+.eventContainer {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.eventForm {
+  max-width: 350px;
+  width:100%;
+  text-align:center;
+}

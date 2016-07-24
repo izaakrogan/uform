@@ -1,0 +1,32 @@
+.container {
+  display:flex;
+  flex-direction:column;
+  text-align: center;
+  margin:0;
+  padding:10em 0;
+}
+
+.loginReg {
+  width:350px;
+  margin:auto;
+  overflow: hidden;
+  label {
+    margin:auto;
+    width:auto;
+  }
+  input {
+    border:0.5px solid #ccc;
+    width:350px;
+    margin-top:10px;
+  }
+  button {
+    width:48%;
+    margin:10 0;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

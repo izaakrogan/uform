@@ -8,8 +8,8 @@ module.exports = (injectExternal) => {
   );
 
   return {
-    actions:require('./actions.js')(services),
-    reducer:require('./reducer.js')(services),
-    login:require('./components/index.js')
+    actions:require('./actions.js')(services)
+    , reducer:require('./reducer.js')(services)
+    , event_create:require('./components/index.js')
   };
 };

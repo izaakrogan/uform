@@ -1,0 +1,27 @@
+.viewEvents {
+  display: flex;
+  flex:1;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content:space-around;
+}
+
+.eventItem {
+  max-width:350px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  padding-left:20px;
+  padding-bottom: 20px;
+  margin:10px;
+  min-height: 200px;
+  background-color: #e5e5e5;
+  * {
+    color:#333;
+  }
+}
+
+.name {
+  text-align: center;
+}

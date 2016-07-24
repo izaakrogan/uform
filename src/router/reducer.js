@@ -3,21 +3,19 @@
 module.exports = ({actionTypes}) => {
 
   const {
-    UPDATE_LOGIN_FIELD
+    CHANGE_ROUTE,
   } = actionTypes;
 
   const initialState = {
-    email:undefined,
-    password:undefined
+    route:{name:'login'}
   };
 
   const reducer = (state,action) => {
     state = state || initialState;
     switch (action.type) {
-      case UPDATE_LOGIN_FIELD:
+      case CHANGE_ROUTE:
         return {
-          ...state,
-          [action.field]:action.value
+          route:action.newRoute,
         };
       default:
         return {

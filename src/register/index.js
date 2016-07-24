@@ -10,6 +10,6 @@ module.exports = (injectExternal) => {
   return {
     actions:require('./actions.js')(services),
     reducer:require('./reducer.js')(services),
-    login:require('./components/index.js')
+    register:require('./components/index.js')
   };
 };
