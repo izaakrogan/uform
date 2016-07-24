@@ -6,4 +6,5 @@ module.exports = {
     store:require('../store/index.js')().actions
   }
   , actionTypes:require('../action_types.js')
+  , config:require('../config.js')
 };

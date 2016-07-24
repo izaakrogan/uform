@@ -5,6 +5,7 @@ const {validationSchema} = require('./utils.js')
 module.exports = ({
     actions
   , actionTypes
+  , config
 }) => {
 
   const {
@@ -12,6 +13,7 @@ module.exports = ({
     store
   } = actions;
 
+  const {serverRoot} = config;
   const internals = {};
 
   internals.changeInput = (field, value, valid) => {
@@ -50,7 +52,7 @@ module.exports = ({
       window.alert('Please correctly fill in name, email and password fields');
     } else {
       const req = {
-        url:'https://uform-api.herokuapp.com/register',
+        url:`${serverRoot}/register`,
         method:'POST',
         headers:{
           'Content-type':'application/json'

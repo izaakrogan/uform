@@ -8,11 +8,11 @@ module.exports = ({actionTypes}) => {
   } = actionTypes;
 
   const initialState = {
-    name: {value:'undefined', validated:true},
-    email: {value:'undefined', validated:true},
-    password: {value:'undefined', validated:true},
-    jobtitle: {value:'undefined'},
-    employer: {value:'undefined'}
+    name: {value:undefined, validated:undefined},
+    email: {value:undefined, validated:undefined},
+    password: {value:undefined, validated:undefined},
+    jobtitle: {value:undefined},
+    employer: {value:undefined}
   };
 
   const reducer = (state,action) => {
