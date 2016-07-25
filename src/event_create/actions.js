@@ -30,6 +30,10 @@ module.exports = ({
     return ({type:actionTypes.CLEAR_EVENT_CREATE});
   }
 
+  internals.updateEventsList = (events) => ({
+    type:actionTypes.UPDATE_EVENTS_LIST,events
+  })
+
   internals.saveEvent = () => (dispatch, getState) => {
 
     const { event_create } = getState();
@@ -77,7 +81,7 @@ module.exports = ({
         return res.json();
       }).then(json => {
         if(json.status === 'success') {
-          dispatch(store.update('events', json.events));
+          dispatch(internals.updateEventsList(List.of(...json.events)));
           dispatch(internals.clear());
           dispatch(router.navigateTo({name:'event_view'}));
         }
@@ -87,57 +91,13 @@ module.exports = ({
     }
   };
 
-  internals.getAddress = () => (dispatch, getState) => {
-
-    const {
-      location,
-    } = getState().create_event;
-
-    const req = {
-        url:`${serverRoot}/getAddress?postcode=${location}`,
-        method:'GET',
-        headers:{
-          'Content-type':'application/json',
-        }
-      };
-
-    fetch(req.url,req).then(response => {
-      return response.json();
-    }).then(json => {
-      if (json.status === 'success') {
-        const addressOptions = json.addresses.map(addressInfo => {
-          const address = addressInfo.split(',');
-          return {
-            line1:address[0]
-            , line2:address[1]
-            , line3:address[2]
-            , line4:address[3]
-            , locality:'GB'
-            , city:address[5].replace(/^\s/,'')
-            , county:address[6]
-          };
-        });
-        dispatch(internals.setAddressOptions(addressOptions));
-        dispatch(internals.updateInput('line1',addressOptions[0].line1));
-        dispatch(internals.updateInput(
-          'line2',addressOptions[0].line2.replace(/^\s/,'')
-        ));
-        dispatch(internals.updateInput('place',addressOptions[0].city));
-        dispatch(internals.updateInput('countryCode','UNITED KINGDOM'));
-      } else if (json.message.response.body.Message === 'Not Found') {
-        window.alert('Not Found')
-      } else if (json.message.response.body.Message === 'Bad Request') {
-        window.alert('The postcode you entered is not valid');
-      } else {
-        window.alert('Error');
-      }
-    }).catch(() => {
-      window.alert('Error')
-    })
-  };
-
   internals.validateInput = (name, value) => (dispatch, getState) => {
-    const valid = validationSchema['oneLetter'](value);
+    let valid;
+    if(name === 'start_time' || name === 'end_time') {
+      valid = validationSchema[name](value, getState().event_create.start_time.value);
+    } else {
+      valid = validationSchema['oneLetter'](value);
+    }
     dispatch(internals.changeValidationState(name, valid));
   }
 

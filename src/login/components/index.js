@@ -21,11 +21,11 @@ class Login extends Component {
     return (
       <div className="container loginReg">
         <h2>LOGIN</h2>
-        <label for='email' type='text'>
+        <label htmlFor='loginEmail' type='text'>
           <span style={{display:'none'}}>Email address</span>
           <input
             ref="autoFocusInput"
-            id='email'
+            id='loginEmail'
             placeholder="email"
             autocomplete="email"
             name="email"
@@ -36,10 +36,10 @@ class Login extends Component {
             }}
           />
         </label>
-        <label for='password' type='text'>
+        <label htmlFor='loginPassword' type='text'>
           <span style={{display:'none'}}>Password</span>
           <input
-            id='password'
+            id='loginPassword'
             type="text"
             placeholder='password'
             type='password'

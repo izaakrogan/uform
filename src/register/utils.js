@@ -2,7 +2,9 @@
 
 const validationSchema = {
   'name': (value) => {
-    return /\w+( +\w+)*$/.test(value);
+    const u = value !== undefined
+    const b = /\w+( +\w+)*$/.test(value);
+    return u && b;
   },
   'email': (value) => {
     return /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i

@@ -1,19 +1,18 @@
 'use strict';
 import R from 'ramda';
+import {List} from 'immutable';
 
 module.exports = ({
   actionTypes,
-  config,
-  actions
+  config
 }) => {
 
-  const {store,router} = actions
   const {serverRoot} =config
 
   const internals = {};
 
-  internals.updateLiveBetList = (bets) => ({
-    type:actionTypes.UPDATE_LIVE_BETS,bets
+  internals.updateEventsList = (events) => ({
+    type:actionTypes.UPDATE_EVENTS_LIST,events
   })
 
   internals.getEvents = () => (dispatch) => {
@@ -26,7 +25,7 @@ module.exports = ({
       return response.json()
     }).then(json => {
       if(json.status === 'success') {
-        dispatch(store.update('events', json.events));
+        dispatch(internals.updateEventsList(List.of(...json.events)));
       }
     })
   }

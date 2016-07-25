@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
 const ViewerActions = require('../index.js')().actions;
-const {actions, Navbar, BetCard} = require('../external.js');
-const Event = require('./event_item.js');
+const { actions, Navbar, BetCard, Event } = require('../external.js');
+
 
 const mapDispatchToProps = {
   ...ViewerActions,
@@ -19,11 +19,11 @@ class EventView extends Component {
   }
 
   render() {
-    const events = this.props.store.events.map((event,index) => {
+    const events = this.props.event_view.events.map((event,index) => {
       return (
         <Event {...event}/>
       );
-    });
+    }).reverse();
 
     return (
       <div>

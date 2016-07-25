@@ -2,21 +2,23 @@
 
 module.exports = ({actionTypes}) => {
 
+  const { List } = require('immutable');
+
   const {
-    UPDATE_LIVE_BETS
+    UPDATE_EVENTS_LIST
   } = actionTypes;
 
   const initialState = {
-    events:[],
+    events:List.of(),
   };
 
   const reducer = (state,action) => {
     state = state || initialState;
     switch (action.type) {
-      case UPDATE_LIVE_BETS:
+      case UPDATE_EVENTS_LIST:
       return {
         ...state,
-        liveBets:action.bets
+        events:action.events
       };
       default:
         return {

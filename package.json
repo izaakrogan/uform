@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "express": "^4.13.4",
+    "immutable": "^3.8.1",
     "ramda": "^0.21.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",

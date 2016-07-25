@@ -9,8 +9,7 @@ module.exports = ({actionTypes}) => {
 
   const initialState = {
     logged_in:false,
-    user:undefined,
-    events:[]
+    user:undefined
   };
 
   const reducer = (state,action) => {

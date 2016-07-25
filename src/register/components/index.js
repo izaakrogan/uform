@@ -18,17 +18,17 @@ class Register extends Component {
   }
 
   render() {
-    var nameValid = this.props.register.name.validated === false ? {borderColor: 'red'} : {};
-    var emailValid = this.props.register.email.validated === false ? {borderColor: 'red'} : {};
-    var passwordValid = this.props.register.password.validated === false ? {borderColor: 'red'} : {};
+    var nameValid = this.props.register.name.validated === false ? {borderColor: 'red', display:'block'} : {};
+    var emailValid = this.props.register.email.validated === false ? {borderColor: 'red', display:'block'} : {};
+    var passwordValid = this.props.register.password.validated === false ? {borderColor: 'red', display:'block'} : {};
     return (
       <div className="container loginReg">
         <h2 style={Object.assign({}, styles.header, {paddingBottom:20})}>Register</h2>
-        <label style={styles.label} for='name' type='text'>
+        <label htmlFor='regName' type='text'>
           <span style={{display:'none'}}>Name</span>
           <input
             ref="autoFocusInput"
-            id='name'
+            id='regName'
             style={nameValid}
             type="text"
             autocomplete="name"
@@ -44,10 +44,13 @@ class Register extends Component {
             }}
           />
         </label>
-        <label style={styles.label} for='email' type='text'>
+        <div className={'validationBox'} style={nameValid}>
+          <p>Please enter your name</p>
+        </div>
+        <label htmlFor='regEmail' type='text'>
           <span style={{display:'none'}}>Email address</span>
           <input
-            id='email'
+            id='regEmail'
             style={emailValid}
             type="email"
             autocomplete="email"
@@ -63,10 +66,13 @@ class Register extends Component {
             }}
           />
         </label>
-        <label style={styles.label} for='password' type='text'>
+        <div className={'validationBox'} style={emailValid}>
+          <p>Please enter a valid email address</p>
+        </div>
+        <label htmlFor='regPassword' type='text'>
           <span style={{display:'none'}}>Password - minimum 4 letters and 1 numbers</span>
           <input
-            id='password'
+            id='regPassword'
             style={passwordValid}
             placeholder='Password (minimum 4 letters 1 number)*'
             required
@@ -80,10 +86,13 @@ class Register extends Component {
             }}
           />
         </label>
-        <label style={styles.label} for='jobtitle' type='text'>
+        <div className={'validationBox'} style={passwordValid}>
+          <p>At least 4 characters and one number</p>
+        </div>
+        <label htmlFor='regJob' type='text'>
           <span style={{display:'none'}}>job title</span>
           <input
-            id='jobtitle'
+            id='regJob'
             type="text"
             placeholder='Job title'
             value={this.props.register.jobtitle.value}
@@ -92,10 +101,10 @@ class Register extends Component {
             }}
           />
         </label>
-        <label style={styles.label} for='employer' type='text'>
+        <label htmlFor='regEmployer' type='text'>
           <span style={{display:'none'}}>employer</span>
           <input
-            id='employer'
+            id='regEmployer'
             type="text"
             placeholder='Employer'
             value={this.props.register.employer.value}

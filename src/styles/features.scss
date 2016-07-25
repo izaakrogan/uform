@@ -41,6 +41,18 @@ button:focus {outline:0;}
   color:#333;
 }
 
+.validationBox {
+  display:none;
+  height:15px;
+  background-color:red;
+  margin-bottom: 10px;
+  margin-top: -10px;
+  padding-bottom: 20px;
+  p {
+    color:white;
+  }
+}
+
 nav {
   height:70px;
   background-color:#333;
