@@ -1,3 +1,5 @@
+'use strict';
+
 const validationSchema = {
   'name': (value) => {
     return /\w+( +\w+)*$/.test(value);

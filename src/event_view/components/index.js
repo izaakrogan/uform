@@ -19,7 +19,6 @@ class EventView extends Component {
   }
 
   render() {
-    console.log(this.props);
     const events = this.props.store.events.map((event,index) => {
       return (
         <Event {...event}/>

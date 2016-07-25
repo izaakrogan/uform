@@ -7,4 +7,5 @@ module.exports = {
   }
   , actionTypes:require('../action_types.js')
   , config:require('../config.js')
+  , styles:require('../styles.js')
 };

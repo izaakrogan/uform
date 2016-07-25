@@ -65,14 +65,12 @@ module.exports = ({
         return response.json();
       }).then(json => {
         if (json.status === 'success') {
-          window.alert('hit registration endpoint and returned success');
           dispatch(store.update('user', json.user));
           dispatch(store.update('logged_in', true));
+          dispatch(router.navigateTo({name:'event_view'}));
         } else {
           throw new Error('Login');
         }
-      }).then(data => {
-        dispatch(router.navigateTo({name:'event_view'}));
       }).catch(error => {
         window.alert('something went wrong in login');
       });

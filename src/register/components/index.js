@@ -3,9 +3,8 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import styles from '../../styles.js';
 const RegistrationActions = require('../index.js')().actions;
-const {actions} = require('../external.js')
+const {actions,styles} = require('../external.js')
 
 const mapDispatchToProps = {
   ...RegistrationActions,
@@ -19,10 +18,9 @@ class Register extends Component {
   }
 
   render() {
-    var nameValid = this.props.register.name.validated === false && {borderColor: 'red'};
-    var emailValid = this.props.register.email.validated === false && {borderColor: 'red'};
-    var passwordValid = this.props.register.password.validated === false && {borderColor: 'red'};
-    var nameValid = this.props.register.name.validated === false && {borderColor: 'red'};
+    var nameValid = this.props.register.name.validated === false ? {borderColor: 'red'} : {};
+    var emailValid = this.props.register.email.validated === false ? {borderColor: 'red'} : {};
+    var passwordValid = this.props.register.password.validated === false ? {borderColor: 'red'} : {};
     return (
       <div className="container loginReg">
         <h2 style={Object.assign({}, styles.header, {paddingBottom:20})}>Register</h2>
@@ -31,11 +29,11 @@ class Register extends Component {
           <input
             ref="autoFocusInput"
             id='name'
-            style={{nameValid}}
+            style={nameValid}
             type="text"
             autocomplete="name"
             name="name"
-            placeholder='Name'
+            placeholder='Name*'
             required
             value={this.props.register.name.value}
             onChange={(e) => {
@@ -50,11 +48,11 @@ class Register extends Component {
           <span style={{display:'none'}}>Email address</span>
           <input
             id='email'
-            style={{nameValid}}
+            style={emailValid}
             type="email"
             autocomplete="email"
             name="email"
-            placeholder='Email Address'
+            placeholder='Email Address*'
             required
             value={this.props.register.email.value}
             onChange={(e) => {
@@ -69,8 +67,8 @@ class Register extends Component {
           <span style={{display:'none'}}>Password - minimum 4 letters and 1 numbers</span>
           <input
             id='password'
-            style={{nameValid}}
-            placeholder='Password (minimum 4 letters 1 number)'
+            style={passwordValid}
+            placeholder='Password (minimum 4 letters 1 number)*'
             required
             type='password'
             value={this.props.register.password.value}
@@ -88,7 +86,6 @@ class Register extends Component {
             id='jobtitle'
             type="text"
             placeholder='Job title'
-            required
             value={this.props.register.jobtitle.value}
             onChange={(e) => {
               return this.props.changeInput('jobtitle', e.target.value)
@@ -101,7 +98,6 @@ class Register extends Component {
             id='employer'
             type="text"
             placeholder='Employer'
-            required
             value={this.props.register.employer.value}
             onChange={(e) => {
               return this.props.changeInput('employer', e.target.value)

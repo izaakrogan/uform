@@ -1,6 +1,7 @@
 'use strict';
 
 import R from 'ramda';
+const {validationSchema} = require('./utils.js')
 
 module.exports = ({
   actionTypes,
@@ -17,7 +18,21 @@ module.exports = ({
     return ({type:actionTypes.CHANGE_EVENT_FIELD,field,value})
   };
 
+  internals.changeOptionalInput = (field, value) => {
+    return ({type:actionTypes.CHANGE_OPTIONAL_EVENT_FIELD,field,value})
+  };
+
+  internals.changeValidationState = (field, validated) => {
+    return ({type:actionTypes.VALIDATE_EVENT_FIELD,field,validated});
+  };
+
+  internals.clear = () => {
+    return ({type:actionTypes.CLEAR_EVENT_CREATE});
+  }
+
   internals.saveEvent = () => (dispatch, getState) => {
+
+    const { event_create } = getState();
     const {
       name,
       type,
@@ -27,21 +42,28 @@ module.exports = ({
       guest_list,
       location,
       additional_info
-    } = getState().event_create;
-
+    } = event_create;
+    const allInputsValidated = [
+      'name',
+      'type',
+      'host',
+      'start_time',
+      'end_time',
+      'guest_list',
+      'location'
+    ].every(field => event_create[field].validated);
     const event = {
-      'name':name,
-      'type':type,
-      'host':host,
-      'start_time':start_time,
-      'end_time':end_time,
-      'guest_list':guest_list,
-      'location':location,
+      'name':name.value,
+      'type':type.value,
+      'host':host.value,
+      'start_time':start_time.value,
+      'end_time':end_time.value,
+      'guest_list':guest_list.value,
+      'location':location.value,
       'additional_info':additional_info,
     };
 
-
-    if(true) {
+    if(allInputsValidated) {
       const req = {
         url:`${serverRoot}/event`,
         method:'POST',
@@ -56,6 +78,7 @@ module.exports = ({
       }).then(json => {
         if(json.status === 'success') {
           dispatch(store.update('events', json.events));
+          dispatch(internals.clear());
           dispatch(router.navigateTo({name:'event_view'}));
         }
       });
@@ -112,6 +135,11 @@ module.exports = ({
       window.alert('Error')
     })
   };
+
+  internals.validateInput = (name, value) => (dispatch, getState) => {
+    const valid = validationSchema['oneLetter'](value);
+    dispatch(internals.changeValidationState(name, valid));
+  }
 
   return internals;
 }
